@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:test/pages/home_page.dart';
 import 'package:test/pages/login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:test/utils/routes.dart';
+import 'package:test/widgets/themes.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,21 +19,24 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // home: Homepage(),
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        fontFamily: GoogleFonts.lato().fontFamily,
-        // primaryTextTheme: GoogleFonts.latoTextTheme(),
-      ),
-      darkTheme: ThemeData(
-        // brightness: Brightness.dark,
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: "/login",
+      themeMode: ThemeMode.light,
+      theme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
+
+      //    ThemeData(
+      //   primarySwatch: Colors.deepPurple,
+      //   fontFamily: GoogleFonts.lato().fontFamily,
+      //   // primaryTextTheme: GoogleFonts.latoTextTheme(),
+      // ),
+      // darkTheme: ThemeData(
+      //   // brightness: Brightness.dark,
+      //   primarySwatch: Colors.blue,
+      // ),
+      initialRoute: MyRoutes.loginRoute,
       routes: {
         // "/": (context) => Homepage(),
-        "/login": (context) => Loginpage(),
-        "/home": (context) => Homepage()
+        MyRoutes.loginRoute: (context) => Loginpage(),
+        MyRoutes.homeRoute: (context) => Homepage()
       },
     );
   }

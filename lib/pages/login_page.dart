@@ -10,13 +10,18 @@ class _LoginpageState extends State<Loginpage> {
   String name = "";
   bool changeButton = false;
   final _formKey = GlobalKey<FormState>();
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     moveToHome(BuildContext context) async {
       if (_formKey.currentState!.validate()) {
         setState(() {
+          username.text = "";
+          password.text = "";
           changeButton = true;
+          name = "";
         });
         await Future.delayed(Duration(seconds: 1));
 
@@ -61,6 +66,7 @@ class _LoginpageState extends State<Loginpage> {
                       TextFormField(
                         decoration: InputDecoration(
                             hintText: "Enter username", labelText: "Username"),
+                        controller: username,
                         onChanged: (value) {
                           name = value;
                           print(name);
@@ -76,7 +82,10 @@ class _LoginpageState extends State<Loginpage> {
                       TextFormField(
                         obscureText: true,
                         decoration: InputDecoration(
-                            hintText: "Enter password", labelText: "Password"),
+                          hintText: "Enter password",
+                          labelText: "Password",
+                        ),
+                        controller: password,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Password cannot be empty";
