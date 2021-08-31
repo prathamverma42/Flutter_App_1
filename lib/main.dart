@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/pages/home_page.dart';
 import 'package:test/pages/login_page.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:test/utils/routes.dart';
 import 'package:test/widgets/themes.dart';
 
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       // darkTheme: ThemeData(
       //   // brightness: Brightness.dark,
       //   primarySwatch: Colors.blue,
-      // ),
+      // ),routes
       initialRoute: MyRoutes.loginRoute,
       routes: {
         // "/": (context) => Homepage(),

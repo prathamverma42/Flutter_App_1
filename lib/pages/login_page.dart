@@ -65,7 +65,11 @@ class _LoginpageState extends State<Loginpage> {
                     children: [
                       TextFormField(
                         decoration: InputDecoration(
-                            hintText: "Enter username", labelText: "Username"),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            hintText: "Enter username",
+                            labelText: "Username"),
                         controller: username,
                         onChanged: (value) {
                           name = value;
@@ -79,9 +83,15 @@ class _LoginpageState extends State<Loginpage> {
                           return null;
                         },
                       ),
+                      SizedBox(
+                        height: 15.0,
+                      ),
                       TextFormField(
                         obscureText: true,
                         decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
                           hintText: "Enter password",
                           labelText: "Password",
                         ),
