@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:test/models/catalog.dart';
@@ -38,82 +37,53 @@ class _HomepageState extends State<Homepage> {
   }
 
   Widget build(BuildContext context) {
-    // final dummylist = List.generate(20, (index) => CatalogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
         title: Text("Catalog App"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
+        // ignore: unnecessary_null_comparison
         child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-            ? ListView.builder(
-                itemCount: CatalogModel.items.length,
-                // itemCount: 8,
+            ? GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                    crossAxisCount: 2),
                 itemBuilder: (context, index) {
-                  return ItemWidget(
-                    item: CatalogModel.items[index],
+                  final item = CatalogModel.items[index];
+                  return Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: GridTile(
+                      header: Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(color: Colors.deepPurple),
+                        child: Text(
+                          item.name,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      child: Image.network(item.image),
+                      footer: Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(color: Colors.black),
+                        child: Text(
+                          "\$" + item.price.toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
                   );
                 },
-                // itemBuilder: (context, index) {
-                //   // return ItemWidget();
-                //   return Column(
-                //     children: [
-                //       Container(
-                //         height: 50,
-                //         width: 350,
-                //         color: Colors.teal,
-                //       ),
-                //       SizedBox(
-                //         height: 10,
-                //       )
-                //     ],
+                itemCount: CatalogModel.items.length,
               )
             : Center(
                 child: CircularProgressIndicator(),
               ),
       ),
-
-      //     Center(
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.center,
-      //     children: [
-      //       SizedBox(
-      //         height: 100,
-      //       ),
-      //       Container(
-      //         height: 100,
-      //         width: 100,
-      //         color: Colors.red,
-      //       ),
-      //       // ),
-      //       SizedBox(
-      //         height: 100,
-      //       ),
-      //       Text(
-      //         "Welcome to My First App",
-      //         style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-      //       ),
-      //       SizedBox(
-      //         height: 50,
-      //       ),
-      //       Container(
-      //         width: 200.0,
-      //         height: 50,
-      //         child: Container(
-      //           height: 150.0,
-      //           color: Colors.teal,
-      //         ),
-      //       ),
-      //       Padding(
-      //         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-      //         child: Divider(
-      //           color: Colors.red,
-      //           thickness: 1.2,
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
       drawer: MyDrawer(),
     );
   }
