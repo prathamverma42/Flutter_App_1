@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/models/catalog.dart';
-import 'package:test/widgets/themes.dart';
+// import 'package:test/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeDetailPage extends StatelessWidget {
@@ -14,9 +14,9 @@ class HomeDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.transparent),
-      backgroundColor: MyTheme.creamColor,
+      backgroundColor: context.canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: EdgeInsets.zero,
@@ -26,9 +26,9 @@ class HomeDetailPage extends StatelessWidget {
               onPressed: () {},
               style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all(MyTheme.darkBluishColor),
+                      MaterialStateProperty.all(context.theme.buttonColor),
                   shape: MaterialStateProperty.all(StadiumBorder())),
-              child: "Add to Cart".text.make(),
+              child: "Add to cart".text.make(),
             ).wh(120, 50)
           ],
         ).p32(),
@@ -38,30 +38,33 @@ class HomeDetailPage extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-                    tag: Key(catalog.id.toString()),
-                    child: Image.network(catalog.image))
-                .h32(context),
+              tag: Key(catalog.id.toString()),
+              child: Image.network(catalog.image),
+            ).h32(context),
             Expanded(
-              child: VxArc(
-                height: 30.0,
-                arcType: VxArcType.CONVEY,
-                edge: VxEdge.TOP,
-                child: Container(
-                  color: Colors.white,
-                  width: context.screenWidth,
-                  child: Column(
-                    children: [
-                      catalog.name.text.xl4
-                          .color(MyTheme.darkBluishColor)
-                          .bold
-                          .make(),
-                      catalog.desc.text.xl.make(),
-                      10.heightBox,
-                    ],
-                  ).py64(),
-                ),
+                child: VxArc(
+              height: 30.0,
+              arcType: VxArcType.CONVEY,
+              edge: VxEdge.TOP,
+              child: Container(
+                color: context.cardColor,
+                width: context.screenWidth,
+                child: Column(
+                  children: [
+                    catalog.name.text.xl4
+                        .color(context.accentColor)
+                        .bold
+                        .make(),
+                    catalog.desc.text.xl.make(),
+                    10.heightBox,
+                    "Dolor sea  dolor amet eirmod dolor labore dolores magna. Amet vero vero vero kasd, dolore sea sed sit invidunt nonumy est sit clita. Diam aliquyam amet tempor diam no aliquyam invidunt. Elitr lorem eirmod dolore clita. Rebum."
+                        .text
+                        .make()
+                        .p16()
+                  ],
+                ).py64(),
               ),
-            )
+            ))
           ],
         ),
       ),
